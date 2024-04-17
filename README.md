@@ -5,3 +5,4 @@ Repository for Implementing Microservice 3 "Membeli Perabotan"
 - Deploy debug 4: changing typo on gcp_static_ip secrets
 - Deploy debug 5: adding docker to vm
 - Deploy debug 6: restarting docker run
+- Deploy debug 7: add another ssh key
