@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.2.4"
     id("io.spring.dependency-management") version "1.1.4"
+    jacoco
 }
 
 group = "com.hoomgroom"
@@ -21,34 +22,35 @@ repositories {
     mavenCentral()
 }
 
-extra["springCloudGcpVersion"] = "5.1.0"
-extra["springCloudVersion"] = "2023.0.1"
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.google.cloud:spring-cloud-gcp-starter")
-    implementation("com.google.cloud:spring-cloud-gcp-starter-pubsub")
-    implementation("com.google.cloud:spring-cloud-gcp-starter-storage")
-    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.security:spring-security-test")
 }
 
-dependencyManagement {
-    imports {
-        mavenBom("com.google.cloud:spring-cloud-gcp-dependencies:${property("springCloudGcpVersion")}")
-        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
-    }
-}
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.test {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport) //to always generate report after tests
+}
+
+tasks.jacocoTestReport {
+    classDirectories.setFrom(files(classDirectories.files.map{
+        fileTree(it) {exclude("**/*Application**")}
+    }))
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(false)
+        csv.required.set(false)
+        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+    }
 }
