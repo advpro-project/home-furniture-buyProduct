@@ -9,4 +9,5 @@ Repository for Implementing Microservice 3 "Membeli Perabotan"
 - Deploy debug 8: docker exited after deploy
 - Deploy debug 9: changing java version on dockerfile
 - Deploy change: changing static ip in deployment
+- Deploy change: changing ssh key
 
