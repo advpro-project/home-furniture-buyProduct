@@ -3,6 +3,8 @@ package com.hoomgroom.buyproduct.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 public class furnitureTest {
     Furniture furniture;
@@ -10,7 +12,7 @@ public class furnitureTest {
     @BeforeEach
     void setUp() {
         this.furniture = new Furniture();
-        this.furniture.setId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        this.furniture.setId(UUID.fromString("eb558e9f-1c39-460e-8860-71af6af63bd6"));
         this.furniture.setName("Furniture 1");
         this.furniture.setType("Type A");
         this.furniture.setDescription("lorem ipsum");
@@ -22,7 +24,7 @@ public class furnitureTest {
 
     @Test
     void testGetFurnitureId() {
-        assertEquals("eb558e9f-1c39-460e-8860-71af6af63bd6", this.furniture.getId());
+        assertEquals(UUID.fromString("eb558e9f-1c39-460e-8860-71af6af63bd6"), this.furniture.getId());
     }
 
     @Test
@@ -51,8 +53,8 @@ public class furnitureTest {
     }
 
     @Test
-    void testGetFurnitureHasDicount() {
-        assertEquals(true, this.furniture.getHasDiscount());
+    void testGetFurnitureHasDiscount() {
+        assertEquals(true, this.furniture.isHasDiscount());
     }
 }
 
