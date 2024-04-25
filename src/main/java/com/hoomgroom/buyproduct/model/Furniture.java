@@ -6,7 +6,7 @@ import lombok.Setter;
 import jakarta.persistence.*;
 import java.util.UUID;
 
-@Getter @Setter
+@Getter @Setter @Entity
 public class Furniture {
 
     @Id
