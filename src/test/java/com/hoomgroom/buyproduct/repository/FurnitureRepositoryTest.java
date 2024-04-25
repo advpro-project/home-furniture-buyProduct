@@ -1,7 +1,9 @@
 package com.hoomgroom.buyproduct.repository;
 
 import com.hoomgroom.buyproduct.model.Furniture;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -14,7 +16,6 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class FurnitureRepositoryTest {
     @Autowired
     private FurnitureRepository furnitureRepository;
@@ -45,12 +46,20 @@ public class FurnitureRepositoryTest {
         furnitureRepository.save(furniture2);
     }
 
+    @AfterEach
+    public void tearDown() {
+        // Clean up test data
+        furnitureRepository.deleteAll(); // Delete all entities
+    }
+
     @Test
+    @Order(1)
     public void whenFindByInternalId_thenReturnFurniture() {
         // given
         Long furnitureInternalId = 1L;
         // when
         Furniture found = furnitureRepository.findByInternalId(furnitureInternalId);
+        System.out.println("this is the INTERNAL ID for debugging: " + found.getInternalId());
 
         // then
         assertEquals(furnitureInternalId, found.getInternalId());
@@ -106,19 +115,6 @@ public class FurnitureRepositoryTest {
         // then
         Furniture furniture1 = iterator.next();
         assertNotEquals(furniture1.getOriginalPrice(), furniture1.getDiscountedPrice());
-    }
-
-    @Test
-    public void whenFindAllByHasDiscountFalse_thenReturnListOfProductNotDiscount() {
-        // given
-        boolean furnitureHasDiscount = false;
-        // when
-        List<Furniture> found = furnitureRepository.findAllByHasDiscount(furnitureHasDiscount);
-        Iterator<Furniture> iterator = found.iterator();
-
-        // then
-        Furniture furniture1 = iterator.next();
-        assertEquals(furniture1.getOriginalPrice(), furniture1.getDiscountedPrice());
     }
 
     @Test

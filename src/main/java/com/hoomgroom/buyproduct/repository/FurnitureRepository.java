@@ -10,7 +10,7 @@ public interface FurnitureRepository extends JpaRepository<Furniture, Long> {
     List<Furniture> findAllByOrderByDiscountedPriceDesc();
     List<Furniture> findAllByHasDiscount(boolean hasDiscount);
     List<Furniture> findAllByType(String type);
-
     Furniture findByInternalId(Long id);
+
 
 }
