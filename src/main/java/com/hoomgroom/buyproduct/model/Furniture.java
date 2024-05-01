@@ -20,6 +20,7 @@ public class Furniture {
     private String type;
     private String description;
     private String imageUrl;
+    private int soldQuantity;
     private double originalPrice;
     private double discountedPrice;
     private boolean hasDiscount;

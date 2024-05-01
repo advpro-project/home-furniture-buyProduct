@@ -17,6 +17,7 @@ public class FurnitureTest {
         this.furniture.setType("Type A");
         this.furniture.setDescription("lorem ipsum");
         this.furniture.setImageUrl("example.url");
+        this.furniture.setSoldQuantity(10);
         this.furniture.setOriginalPrice(1000);
         this.furniture.setDiscountedPrice(500);
         this.furniture.setHasDiscount(true);
@@ -40,6 +41,16 @@ public class FurnitureTest {
     @Test
     void testGetFurnitureDescription() {
         assertEquals("lorem ipsum", this.furniture.getDescription());
+    }
+
+    @Test
+    void testGetFurnitureSoldQuantity() {
+        assertEquals(10, this.furniture.getSoldQuantity());
+    }
+
+    @Test
+    void testGetFurnitureImageUrl() {
+        assertEquals("example.url", this.furniture.getImageUrl());
     }
 
     @Test
