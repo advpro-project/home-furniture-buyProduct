@@ -9,7 +9,7 @@ public interface FurnitureSearchAndFilterService {
     List<Furniture> filterFurnituresByMinPrice();
     List<Furniture> filterFurnituresByHasDiscount(boolean hasDiscount);
     List<Furniture> filterFurnituresByType(String type);
-    Furniture findByInternalId(Long id);
+
 
 
 }
