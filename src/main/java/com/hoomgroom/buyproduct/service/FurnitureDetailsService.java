@@ -1,7 +1,8 @@
 package com.hoomgroom.buyproduct.service;
 
 import com.hoomgroom.buyproduct.model.Furniture;
+import org.springframework.stereotype.Service;
 
 public interface FurnitureDetailsService {
-    Furniture getFurnitureByInternalId(Long id);
+    public Furniture getFurnitureByInternalId(Long id);
 }

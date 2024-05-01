@@ -27,12 +27,12 @@ public class FurnitureDetailsControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @Mock
-    private FurnitureDetailsServiceImpl furnitureDetailsServiceImpl;
+    private FurnitureDetailsService furnitureDetailsService;
     @InjectMocks
     private FurnitureDetailsController furnitureDetailsController;
 
     @Test
-    public void testGetItemDetails() throws Exception {
+    public void testGetFurnitureDetails() throws Exception {
         Furniture furniture;
         furniture = new Furniture();
         furniture.setInternalId(1L);
@@ -47,8 +47,7 @@ public class FurnitureDetailsControllerTest {
 
         Long furnitureInternalId = 1L; // Assuming the item ID to test with is 1L
 
-        // Mock the behavior of the itemService.getItemById method
-        when(furnitureDetailsServiceImpl.getFurnitureByInternalId(furnitureInternalId)).thenReturn(furniture);
+        when(furnitureDetailsService.getFurnitureByInternalId(furnitureInternalId)).thenReturn(furniture);
 
         // Perform GET request to the endpoint and verify the response
         mockMvc.perform(MockMvcRequestBuilders.get("/furniture/{furnitureInternalId}", furnitureInternalId)
