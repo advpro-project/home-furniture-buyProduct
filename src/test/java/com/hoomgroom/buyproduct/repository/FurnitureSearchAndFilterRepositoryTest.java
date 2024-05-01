@@ -3,12 +3,9 @@ package com.hoomgroom.buyproduct.repository;
 import com.hoomgroom.buyproduct.model.Furniture;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.Iterator;
 import java.util.List;
@@ -16,9 +13,9 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
-public class FurnitureRepositoryTest {
+public class FurnitureSearchAndFilterRepositoryTest {
     @Autowired
-    private FurnitureRepository furnitureRepository;
+    private FurnitureSearchAndFilterRepository furnitureSearchAndFilterRepository;
 
     @BeforeEach
     public void setUp() {
@@ -32,7 +29,7 @@ public class FurnitureRepositoryTest {
         furniture.setOriginalPrice(1000);
         furniture.setDiscountedPrice(500);
         furniture.setHasDiscount(true);
-        furnitureRepository.save(furniture);
+        furnitureSearchAndFilterRepository.save(furniture);
         Furniture furniture2 = new Furniture();
         furniture2 = new Furniture();
         furniture2.setId(UUID.fromString("eb558e9f-1c39-460e-8860-71af6af63bd7"));
@@ -43,37 +40,13 @@ public class FurnitureRepositoryTest {
         furniture2.setOriginalPrice(1000);
         furniture2.setDiscountedPrice(1000);
         furniture2.setHasDiscount(false);
-        furnitureRepository.save(furniture2);
+        furnitureSearchAndFilterRepository.save(furniture2);
     }
 
     @AfterEach
     public void tearDown() {
         // Clean up test data
-        furnitureRepository.deleteAll(); // Delete all entities
-    }
-
-    @Test
-    @Order(1)
-    public void whenFindByInternalId_thenReturnFurniture() {
-        // given
-        Long furnitureInternalId = 1L;
-        // when
-        Furniture found = furnitureRepository.findByInternalId(furnitureInternalId);
-        System.out.println("this is the INTERNAL ID for debugging: " + found.getInternalId());
-
-        // then
-        assertEquals(furnitureInternalId, found.getInternalId());
-    }
-
-    @Test
-    public void whenFindByNotFoundInternalId_thenReturnNull() {
-        // given
-        Long notFoundFurnitureInternalId = 3L;
-        // when
-        Furniture found = furnitureRepository.findByInternalId(notFoundFurnitureInternalId);
-
-        // then
-        assertNull(found);
+        furnitureSearchAndFilterRepository.deleteAll(); // Delete all entities
     }
 
     @Test
@@ -81,7 +54,7 @@ public class FurnitureRepositoryTest {
         // given
         String furnitureType = "Type A";
         // when
-        List<Furniture> found = furnitureRepository.findAllByType(furnitureType);
+        List<Furniture> found = furnitureSearchAndFilterRepository.findAllByType(furnitureType);
         Iterator<Furniture> iterator = found.iterator();
 
         // then
@@ -97,7 +70,7 @@ public class FurnitureRepositoryTest {
         // given
         String furnitureType = "Type B";
         // when
-        List<Furniture> found = furnitureRepository.findAllByType(furnitureType);
+        List<Furniture> found = furnitureSearchAndFilterRepository.findAllByType(furnitureType);
         Iterator<Furniture> iterator = found.iterator();
 
         // then
@@ -109,7 +82,7 @@ public class FurnitureRepositoryTest {
         // given
         boolean furnitureHasDiscount = true;
         // when
-        List<Furniture> found = furnitureRepository.findAllByHasDiscount(furnitureHasDiscount);
+        List<Furniture> found = furnitureSearchAndFilterRepository.findAllByHasDiscount(furnitureHasDiscount);
         Iterator<Furniture> iterator = found.iterator();
 
         // then
@@ -118,9 +91,22 @@ public class FurnitureRepositoryTest {
     }
 
     @Test
+    public void whenFindAllByHasDiscountFalse_thenReturnListOfProductNotDiscount() {
+        // given
+        boolean furnitureHasDiscount = false;
+        // when
+        List<Furniture> found = furnitureSearchAndFilterRepository.findAllByHasDiscount(furnitureHasDiscount);
+        Iterator<Furniture> iterator = found.iterator();
+
+        // then
+        Furniture furniture1 = iterator.next();
+        assertEquals(furniture1.getOriginalPrice(), furniture1.getDiscountedPrice());
+    }
+
+    @Test
     public void whenFindAllByPriceDesc_thenReturnListOfProductWithMaxPrice() {
         // when
-        List<Furniture> found = furnitureRepository.findAllByOrderByDiscountedPriceDesc();
+        List<Furniture> found = furnitureSearchAndFilterRepository.findAllByOrderByDiscountedPriceDesc();
         Iterator<Furniture> iterator = found.iterator();
 
         // then
@@ -132,7 +118,7 @@ public class FurnitureRepositoryTest {
     @Test
     public void whenFindAllByPriceAsc_thenReturnListOfProductWithMinPrice() {
         // when
-        List<Furniture> found = furnitureRepository.findAllByOrderByDiscountedPriceAsc();
+        List<Furniture> found = furnitureSearchAndFilterRepository.findAllByOrderByDiscountedPriceAsc();
         Iterator<Furniture> iterator = found.iterator();
 
         // then

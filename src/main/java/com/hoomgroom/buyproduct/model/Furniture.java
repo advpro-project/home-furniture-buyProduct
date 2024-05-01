@@ -6,7 +6,9 @@ import lombok.Setter;
 import jakarta.persistence.*;
 import java.util.UUID;
 
-@Getter @Setter @Entity
+@Getter @Setter
+@Entity
+@Table(name = "furnitures")
 public class Furniture {
 
     @Id
