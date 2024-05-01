@@ -1,13 +1,12 @@
-Repository for Implementing Microservice 3 "Membeli Perabotan"
-- Deploy debug 1
-- Deploy debug 2: changing ssh key pair
-- Deploy debug 3: changing gcp_username
-- Deploy debug 4: changing typo on gcp_static_ip secrets
-- Deploy debug 5: adding docker to vm
-- Deploy debug 6: restarting docker run
-- Deploy debug 7: add another ssh key
-- Deploy debug 8: docker exited after deploy
-- Deploy debug 9: changing java version on dockerfile
-- Deploy change: changing static ip in deployment
-- Deploy change: changing ssh key
+Naufal Ichsan - 2206082013
 
+High Level Networking: REST API
+Saya menggunakan REST API pada fitur saya karena beberapa alasan, diantaranya
+1. Kesederhanaan dan Keterbacaan: RESTful API dirancang untuk menjadi sederhana dan mudah dibaca. Dengan menggunakan HTTP protokol yang sudah umum digunakan, pemahaman dan penggunaannya menjadi lebih mudah bagi pengembang dan klien.
+2. Skalabilitas: RESTful API memungkinkan skalabilitas yang baik karena tidak ada keadaan (state) yang disimpan di server. Setiap permintaan dari klien berdiri sendiri dan mandiri, sehingga memudahkan dalam menambah atau mengurangi jumlah server saat diperlukan.
+3. Pemisahan Antar Server dan Klien: RESTful API memisahkan antara server dan klien, yang berarti perubahan pada sisi server tidak akan mempengaruhi klien (asalkan tidak mengubah struktur endpoint yang ada).
+4. Mendukung Berbagai Format Data: RESTful API mendukung berbagai format data seperti JSON, XML, dan lainnya, sehingga memungkinkan integrasi dengan berbagai jenis aplikasi dan platform.
+5. Kinerja: RESTful API biasanya memiliki kinerja yang baik karena penggunaan HTTP yang ringan dan tidak memerlukan banyak sumber daya.
+6. Cacheability: RESTful API memanfaatkan fitur caching pada HTTP, yang memungkinkan respon yang sama dikirimkan kembali tanpa perlu diproses ulang jika permintaan serupa datang lagi. Ini dapat meningkatkan kinerja dan mengurangi beban server.7
+7. Skema Terbuka (Open Schema): RESTful API biasanya menggunakan format data terbuka seperti JSON, yang memudahkan dalam berbagi dan berkolaborasi dengan pengembang lain.
+8. Mendukung Metode HTTP: RESTful API menggunakan metode HTTP standar seperti GET, POST, PUT, DELETE, dll., yang membuatnya kompatibel dengan berbagai aplikasi dan infrastruktur yang sudah ada.
