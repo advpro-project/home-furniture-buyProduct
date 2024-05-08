@@ -14,4 +14,18 @@ public class FurnitureDetailsServiceImpl implements FurnitureDetailsService {
         Furniture furniture = furnitureDetailsRepository.findByInternalId(id);
         return furniture;
     }
+
+    public Furniture seed() {
+        Furniture furniture = new Furniture();
+        furniture.setName("Furniture 3");
+        furniture.setDescription("lorem ipsum");
+        furniture.setType("Type B");
+        furniture.setHasDiscount(true);
+        furniture.setImageUrl("random.co.id");
+        furniture.setSoldQuantity(1000);
+        furniture.setOriginalPrice(20000);
+        furniture.setDiscountedPrice(10000);
+        furnitureDetailsRepository.save(furniture);
+        return furniture;
+    }
 }

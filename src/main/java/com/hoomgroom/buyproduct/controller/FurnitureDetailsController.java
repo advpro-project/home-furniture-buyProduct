@@ -25,4 +25,14 @@ public class FurnitureDetailsController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/seed")
+    public ResponseEntity<Furniture> seed() {
+        Furniture furniture = furnitureDetailsService.seed();
+        if (furniture != null) {
+            return ResponseEntity.ok(furniture);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
