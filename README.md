@@ -18,3 +18,4 @@ debug deployment2: changing jdbc url
 debug deployment3: changing jdbc url 2
 debug deployment4: changing cd.yml for database configuration using secrets
 debug deployment5: changing jdbc url 3
+debug deployment6: changing jdbc username
