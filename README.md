@@ -16,3 +16,4 @@ Saya menggunakan REST API pada fitur saya karena beberapa alasan, diantaranya
 debug deployment1: changing docker password
 debug deployment2: changing jdbc url
 debug deployment3: changing jdbc url 2
+debug deployment4: changing cd.yml for database configuration using secrets
