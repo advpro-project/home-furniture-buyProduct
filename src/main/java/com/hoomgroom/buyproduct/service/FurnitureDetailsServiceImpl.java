@@ -17,13 +17,13 @@ public class FurnitureDetailsServiceImpl implements FurnitureDetailsService {
 
     public Furniture seed() {
         Furniture furniture = new Furniture();
-        furniture.setName("Furniture 3");
+        furniture.setName("Furniture 4");
         furniture.setDescription("lorem ipsum");
-        furniture.setType("Type B");
+        furniture.setType("Type C");
         furniture.setHasDiscount(true);
         furniture.setImageUrl("random.co.id");
         furniture.setSoldQuantity(1000);
-        furniture.setOriginalPrice(20000);
+        furniture.setOriginalPrice(30000);
         furniture.setDiscountedPrice(10000);
         furnitureDetailsRepository.save(furniture);
         return furniture;

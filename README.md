@@ -15,3 +15,4 @@ Saya menggunakan REST API pada fitur saya karena beberapa alasan, diantaranya
 ## deployment debug
 debug deployment1: changing docker password
 debug deployment2: changing jdbc url
+debug deployment3: changing jdbc url 2
