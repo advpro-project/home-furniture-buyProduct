@@ -8,8 +8,5 @@ import java.util.List;
 
 @Repository
 public interface FurnitureSearchAndFilterRepository extends JpaRepository<Furniture, Long> {
-    List<Furniture> findAllByOrderByDiscountedPriceAsc();
-    List<Furniture> findAllByOrderByDiscountedPriceDesc();
-    List<Furniture> findAllByHasDiscount(boolean hasDiscount);
-    List<Furniture> findAllByType(String type);
+    List<Furniture> findAllByNameContainingIgnoreCase(String keyword);
 }
