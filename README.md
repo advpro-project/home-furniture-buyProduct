@@ -11,7 +11,9 @@ Saya menggunakan REST API pada fitur saya karena beberapa alasan, diantaranya
 7. Skema Terbuka (Open Schema): RESTful API biasanya menggunakan format data terbuka seperti JSON, yang memudahkan dalam berbagi dan berkolaborasi dengan pengembang lain.
 8. Mendukung Metode HTTP: RESTful API menggunakan metode HTTP standar seperti GET, POST, PUT, DELETE, dll., yang membuatnya kompatibel dengan berbagai aplikasi dan infrastruktur yang sudah ada.
 
-
+Monitoring: Grafana dan Prometheus
+Saya menggunakan grafana dan prometheus untuk melakukan monitoring, namun saat ini set upnya masih di localhost, apabila diperlukan akan dicoba untuk set up di deployment
+screenshot bukti penggunaan ada pada ```./assets/images```
 ## deployment debug
 debug deployment1: changing docker password
 debug deployment2: changing jdbc url

@@ -5,7 +5,7 @@ import com.hoomgroom.buyproduct.model.Furniture;
 import java.util.List;
 
 public interface FurnitureSearchAndFilterService {
-    List<Furniture> filterFurnituresByKeyword(String type);
+    List<Furniture> filterFurnituresByKeyword(String keyword);
 
 
 
