@@ -1,32 +1,37 @@
 package com.hoomgroom.buyproduct.controller;
 
 import com.hoomgroom.buyproduct.model.PurchaseTransaction;
-import com.hoomgroom.buyproduct.model.PurchaseTransaction.PurchaseTransactionBuilder;
+import com.hoomgroom.buyproduct.service.PurchaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/purchase")
 public class PurchaseController {
+
+    @Autowired
+    private PurchaseService purchaseService;
 
     private List<PurchaseTransaction> transactionList = new ArrayList<>();
 
     // Endpoint untuk melakukan pembelian produk
     @PostMapping("/buy")
     public PurchaseTransaction buyProduct(@RequestBody PurchaseRequest request) {
-        // Validasi request, misalnya apakah user ID valid, apakah produk ID valid, dsb.
 
         // Simulasi pembelian produk
-        PurchaseTransaction transaction = new PurchaseTransactionBuilder()
+        PurchaseTransaction transaction = new PurchaseTransaction.PurchaseTransactionBuilder()
                 .userId(request.getUserId())
                 .productId(request.getProductId())
                 .totalPrice(request.getTotalPrice())
                 .paymentMethod(request.getPaymentMethod())
                 .promoCode(request.getPromoCode())
                 .build();
+
+        // Panggil service asynchronous untuk memproses pembelian
+        purchaseService.processPurchase(transaction);
 
         // Tambahkan transaksi ke dalam daftar transaksi
         transactionList.add(transaction);
@@ -38,6 +43,19 @@ public class PurchaseController {
     @GetMapping("/transactions")
     public List<PurchaseTransaction> getAllTransactions() {
         return transactionList;
+    }
+
+    // Endpoint untuk melakukan top-up saldo
+    @PostMapping("/top-up")
+    public String topUpBalance(@RequestBody TopUpRequest request) {
+        purchaseService.topUp(request.getUserId(), request.getAmount());
+        return "Top-up successful";
+    }
+
+    // Endpoint untuk melihat saldo saat ini
+    @GetMapping("/balance")
+    public double getBalance(@RequestParam String userId) {
+        return purchaseService.getBalance(userId);
     }
 
     // Kelas model untuk request pembelian
@@ -87,6 +105,29 @@ public class PurchaseController {
 
         public void setPromoCode(String promoCode) {
             this.promoCode = promoCode;
+        }
+    }
+
+    // Kelas model untuk request top-up saldo
+    public static class TopUpRequest {
+        private String userId;
+        private double amount;
+
+        // Constructor, getters, and setters
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        public double getAmount() {
+            return amount;
+        }
+
+        public void setAmount(double amount) {
+            this.amount = amount;
         }
     }
 }
