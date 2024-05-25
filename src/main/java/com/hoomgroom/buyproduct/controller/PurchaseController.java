@@ -5,7 +5,6 @@ import com.hoomgroom.buyproduct.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -14,8 +13,6 @@ public class PurchaseController {
 
     @Autowired
     private PurchaseService purchaseService;
-
-    private List<PurchaseTransaction> transactionList = new ArrayList<>();
 
     // Endpoint untuk melakukan pembelian produk
     @PostMapping("/buy")
@@ -33,16 +30,13 @@ public class PurchaseController {
         // Panggil service asynchronous untuk memproses pembelian
         purchaseService.processPurchase(transaction);
 
-        // Tambahkan transaksi ke dalam daftar transaksi
-        transactionList.add(transaction);
-
         return transaction;
     }
 
     // Endpoint untuk melihat daftar transaksi produk
     @GetMapping("/transactions")
     public List<PurchaseTransaction> getAllTransactions() {
-        return transactionList;
+        return purchaseService.getAllTransactions();
     }
 
     // Endpoint untuk melakukan top-up saldo
@@ -131,4 +125,6 @@ public class PurchaseController {
         }
     }
 }
+
+
 

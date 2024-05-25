@@ -3,11 +3,16 @@ package com.hoomgroom.buyproduct.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import jakarta.persistence.*;
 import java.util.UUID;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "transactions")
 public class PurchaseTransaction {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String userId;
     private String productId;
@@ -23,6 +28,11 @@ public class PurchaseTransaction {
         this.paymentMethod = builder.paymentMethod;
         this.promoCode = builder.promoCode;
     }
+
+    public PurchaseTransaction() {
+
+    }
+
 
     public static class PurchaseTransactionBuilder {
         private UUID id;
@@ -66,3 +76,4 @@ public class PurchaseTransaction {
         }
     }
 }
+
