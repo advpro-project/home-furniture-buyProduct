@@ -54,6 +54,7 @@ public class PurchaseController {
     public static class PurchaseRequest {
         private String userId;
         private String productId;
+        private double totalPrice;
         private String paymentMethod;
         private String promoCode;
 
@@ -88,6 +89,14 @@ public class PurchaseController {
 
         public void setPromoCode(String promoCode) {
             this.promoCode = promoCode;
+        }
+
+        public double getTotalPrice() {
+            return totalPrice;
+        }
+
+        public void setTotalPrice(double newTotal) {
+            this.totalPrice = newTotal;
         }
     }
 
