@@ -21,9 +21,9 @@ public class PurchaseService {
 
     @Autowired
     private UserWalletRepository userWalletRepository;
-
+    @Autowired
     private RestTemplate restTemplate;
-    @Async
+    //@Async
     public PurchaseTransaction processPurchase(PurchaseTransaction transaction) {
         // Dapatkan wallet pengguna dari database
         Optional<UserWallet> optionalWallet = userWalletRepository.findById(transaction.getUserId());
