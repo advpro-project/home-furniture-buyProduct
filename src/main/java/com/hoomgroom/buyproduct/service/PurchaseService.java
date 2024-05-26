@@ -22,13 +22,7 @@ public class PurchaseService {
     @Autowired
     private UserWalletRepository userWalletRepository;
 
-    @Autowired
     private RestTemplate restTemplate;
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
     @Async
     public PurchaseTransaction processPurchase(PurchaseTransaction transaction) {
         // Dapatkan wallet pengguna dari database
