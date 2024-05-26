@@ -14,15 +14,17 @@ public class PurchaseController {
     @Autowired
     private PurchaseService purchaseService;
 
-    // Endpoint untuk melakukan pembelian produk
     @PostMapping("/buy")
     public PurchaseTransaction buyProduct(@RequestBody PurchaseRequest request) {
+
+        // Dapatkan data produk dari endpoint eksternal
+        PurchaseService.Product product = purchaseService.getProductById(request.getProductId());
 
         // Simulasi pembelian produk
         PurchaseTransaction transaction = new PurchaseTransaction.PurchaseTransactionBuilder()
                 .userId(request.getUserId())
-                .productId(request.getProductId())
-                .totalPrice(request.getTotalPrice())
+                .productId(product.getId())
+                .totalPrice(product.getPrice())
                 .paymentMethod(request.getPaymentMethod())
                 .promoCode(request.getPromoCode())
                 .build();
@@ -33,30 +35,25 @@ public class PurchaseController {
         return transaction;
     }
 
-    // Endpoint untuk melihat daftar transaksi produk
     @GetMapping("/transactions")
     public List<PurchaseTransaction> getAllTransactions() {
         return purchaseService.getAllTransactions();
     }
 
-    // Endpoint untuk melakukan top-up saldo
     @PostMapping("/top-up")
     public String topUpBalance(@RequestBody TopUpRequest request) {
         purchaseService.topUp(request.getUserId(), request.getAmount());
         return "Top-up successful";
     }
 
-    // Endpoint untuk melihat saldo saat ini
     @GetMapping("/balance")
     public double getBalance(@RequestParam String userId) {
         return purchaseService.getBalance(userId);
     }
 
-    // Kelas model untuk request pembelian
     public static class PurchaseRequest {
         private String userId;
         private String productId;
-        private double totalPrice;
         private String paymentMethod;
         private String promoCode;
 
@@ -77,14 +74,6 @@ public class PurchaseController {
             this.productId = productId;
         }
 
-        public double getTotalPrice() {
-            return totalPrice;
-        }
-
-        public void setTotalPrice(double totalPrice) {
-            this.totalPrice = totalPrice;
-        }
-
         public String getPaymentMethod() {
             return paymentMethod;
         }
@@ -102,7 +91,6 @@ public class PurchaseController {
         }
     }
 
-    // Kelas model untuk request top-up saldo
     public static class TopUpRequest {
         private String userId;
         private double amount;
@@ -125,6 +113,4 @@ public class PurchaseController {
         }
     }
 }
-
-
 

@@ -20,6 +20,9 @@ public class PurchaseTransaction {
     private String paymentMethod;
     private String promoCode;
 
+    public PurchaseTransaction() {
+    }
+
     private PurchaseTransaction(PurchaseTransactionBuilder builder) {
         this.id = builder.id;
         this.userId = builder.userId;
@@ -28,11 +31,6 @@ public class PurchaseTransaction {
         this.paymentMethod = builder.paymentMethod;
         this.promoCode = builder.promoCode;
     }
-
-    public PurchaseTransaction() {
-
-    }
-
 
     public static class PurchaseTransactionBuilder {
         private UUID id;
@@ -43,7 +41,7 @@ public class PurchaseTransaction {
         private String promoCode;
 
         public PurchaseTransactionBuilder() {
-            this.id = UUID.randomUUID(); // Generate UUID for id
+            this.id = UUID.randomUUID();
         }
 
         public PurchaseTransactionBuilder userId(String userId) {
