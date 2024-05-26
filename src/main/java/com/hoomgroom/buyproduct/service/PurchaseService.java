@@ -23,7 +23,7 @@ public class PurchaseService {
     private UserWalletRepository userWalletRepository;
     @Autowired
     private RestTemplate restTemplate;
-    //@Async
+
     public PurchaseTransaction processPurchase(PurchaseTransaction transaction) {
         // Dapatkan wallet pengguna dari database
         Optional<UserWallet> optionalWallet = userWalletRepository.findById(transaction.getUserId());
@@ -37,7 +37,7 @@ public class PurchaseService {
 
         // penggunaan kode promo
         if (transaction.getPromoCode() != null && !transaction.getPromoCode().isEmpty()) {
-            // Misalnya: finalPrice *= 0.9;
+
         }
 
         if (currentBalance >= finalPrice) {
