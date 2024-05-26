@@ -24,7 +24,7 @@ public class PurchaseController {
         PurchaseTransaction transaction = new PurchaseTransaction.PurchaseTransactionBuilder()
                 .userId(request.getUserId())
                 .productId(product.getId())
-                .totalPrice(product.getPrice())
+                .totalPrice(request.getTotalPrice())
                 .paymentMethod(request.getPaymentMethod())
                 .promoCode(request.getPromoCode())
                 .build();
